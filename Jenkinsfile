@@ -26,7 +26,6 @@ pipeline {
                -Dsonar.projectKey=PythonJenkinsTest \
                -Dsonar.sources=. \
                -Dsonar.css.node=. \
-               -Dsonar.exclusions=vendor/**, storage/**, resources/** \
                -Dsonar.language=py \
                -Dsonar.java.binaries=target/classes \
                -Dsonar.sourceEncoding=UTF-8 \
