@@ -20,7 +20,7 @@ pipeline {
         
         stage('PythonTest') {
             steps {
-                sh 'python Calculator.py'
+                sh 'python calendar.py'
             }
         }
         
