@@ -20,7 +20,7 @@ pipeline {
        stage('Code Quality Check via SonarQube') {
            steps {
                 script {
-                def scannerHome = tool 'SonarQube';
+                def scannerHome = tool 'Sonar-Scanner';
                 withSonarQubeEnv("SonarQube-Server") {
                 sh "${scannerHome}/opt/sonar-scanner-4.5/bin/sonar-scanner \
                -Dsonar.projectKey=test-node-js \
