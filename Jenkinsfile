@@ -23,13 +23,12 @@ pipeline {
                 def scannerHome = tool 'Sonar-Scanner';
                 withSonarQubeEnv("SonarQube-Server") {
                 sh "${scannerHome}/opt/sonar-scanner-4.5/bin/sonar-scanner \
-               -Dsonar.projectKey=test-node-js \
+               -Dsonar.projectKey=PythonJenkinsTest \
                -Dsonar.sources=. \
                -Dsonar.css.node=. \
                -Dsonar.exclusions=vendor/**, storage/**, resources/** \
                -Dsonar.language=py \
                -Dsonar.java.binaries=target/classes \
-               -Dsonar.sources=/var/lib/jenkins/workspace/$JOB_NAME \
                -Dsonar.sourceEncoding=UTF-8 \
                -Dsonar.projectName=PythonJenkinsTest \
                -Dsonar.host.url=http:192.168.1.204:9000 \
