@@ -32,7 +32,6 @@ pipeline {
                -Dsonar.sources=/var/lib/jenkins/workspace/$JOB_NAME \
                -Dsonar.sourceEncoding=UTF-8 \
                -Dsonar.projectName=PythonJenkinsTest \
-               -Dsonar.projectVersion=1.1 \     
                -Dsonar.host.url=http:192.168.1.204:9000 \
                -Dsonar.login=admin \
                -Dsonar.password=Admin"
