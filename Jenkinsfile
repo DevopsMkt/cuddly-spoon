@@ -17,7 +17,11 @@ pipeline {
                 echo 'Deploying'
             }
         }
+    stage('SonarQube Analysis') {
+       sh '${scannerHome}/opt/sonar-scanner-4.5/bin/sonar-scanner -Dsonar.host.url=http://192.168.1.204:9000 -Dsonar.projectName=meanstackapp1 -Dsonar.projectVersion=1.1 -Dsonar.projectKey=meanstack1:app -Dsonar.projectBaseDir=/var/lib/jenkins/workspace/SonarQube-Test-Pipeline1 '
     }
+    }
+    
     post {
         always {
             echo 'This will always run'
