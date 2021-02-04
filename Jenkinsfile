@@ -26,6 +26,11 @@ pipeline {
                -Dsonar.projectKey=test-node-js \
                -Dsonar.sources=. \
                -Dsonar.css.node=. \
+               -Dsonar.exclusions=vendor/**, storage/**, resources/** \
+               -Dsonar.language=py \
+               -Dsonar.java.binaries=target/classes \
+               -Dsonar.sources=/var/lib/jenkins/workspace/$JOB_NAME \
+               -Dsonar.sourceEncoding=UTF-8 \
                -Dsonar.projectName=PythonJenkinsTest \
                -Dsonar.projectVersion=1.1 \     
                -Dsonar.host.url=http:192.168.1.204:9000 \
