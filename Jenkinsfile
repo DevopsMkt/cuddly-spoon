@@ -22,7 +22,7 @@ pipeline {
                 script {
                 def scannerHome = tool 'Sonar-Scanner';
                 withSonarQubeEnv("SonarQube-Server") {
-                sh "${scannerHome}/opt/sonar-scanner-4.5/bin/sonar-scanner \
+                sh "${scannerHome}/bin/sonar-scanner \
                -Dsonar.projectKey=PythonJenkinsTest \
                -Dsonar.sources=. \
                -Dsonar.css.node=. \
