@@ -1,77 +1,37 @@
-# define the function
-def calculate():
-    print('Please choose your operator adding(+) subtracting(-) multiplying(*) didviding(/) for power(**) for module(%)')
-
-    number_1 = int(input("Enter your first digit: "))
-    operation = input("Enter your operator: ")
-    number_2 = int(input("Enter your first digit: "))
-
-
-# adding
-    if operation == '+':
-        print('{} + {} = '.format(number_1, number_2))
-        print(number_1 + number_2)
-        print("You were adding.\n")
-        print("How do I know that I'm a smart progammer ;)\n")
-
-# subtracting
-    elif operation == '-':
-        print('{} - {} = '.format(number_1, number_2))
-        print(number_1 - number_2)
-        print("You were subtracting.\n")
-        print("How do I know that I'm a smart progammer ;)\n")
-
-# mulitplaying
-    elif operation == '*':
-        print('{} * {} = '.format(number_1, number_2))
-        print(number_1 * number_2)
-        print("You were mulitplaying.")
-        print("How do I know that I'm a smart progammer ;)\n")
-
-# dividing
-    elif operation == '/':
-        print('{} / {} = '.format(number_1, number_2))
-        print(number_1 / number_2)
-        print("You were dividing.\n")
-        print("How do I know that I'm a smart progammer ;)\n")
-
-# for power
-    elif operation == '**':
-        print('{} ** {} = '.format(number_1, number_2))
-        print(number_1 ** number_2)
-        print("You were using for power.\n")
-        print("How do I know that I'm a smart progammer ;)\n")
-
-# module
-    elif operation == '%':
-        print('{} % {} = '.format(number_1, number_2))
-        print(number_1 % number_2)
-        print("You were using module.\n")
-        print("How do I know that I'm a smart progammer ;)\n")
-
-    # if they get a error
+# simple calculator
+try:
+  # prompt user
+    num1 = float(input("Please Enter The first number: "))
+    operator = input("Please choose the operator (+) for addition, (-) for subtraction, (*) for multiplication"
+                     "(/) for division , (%) for remainder: ")
+    num2 = float(input("Please Enter The second number: "))
+    
+    if operator == '+':
+        result = num1 + num2
+        print("The result is: ", result)
+    elif operator == '-':
+        result = num1 - num2
+        print("The result is: ", result)
+    elif operator == '*':
+        result = num1 * num2
+        print("The result is: ", result)
+    elif operator == '/':
+        try:
+            if True:
+                result = num1 / num2
+                print(result)
+        except ZeroDivisionError as err:
+            print(err, " oops! zero division occur ")
+    elif operator == '%':
+        if operator == '%':
+            result = num1 % num2
+            print("The result is: ", result)
     else:
-        print("Your number you have typed is invalid, please restart your program!")
-    # add again() here as a function outside the calculate()
-    again()
+        raise TypeError
 
 
-def again():
-    cal_again = input("Do you want to calculate again? Y = yes or N = no: ")
+except ValueError:
+    print("wrong value, suggest integer or decimal")
+finally:
+    print("All Done")
 
-    # Taking user input
-    if cal_again.upper() == 'Y':
-        calculate()
-    elif cal_again.upper() == 'N':
-        print('Leave kid ;-;')
-    else:
-        again()
-
-
-def welcome():
-    print("Welcome to my calculator made by Pepa pig lol made in python :D")
-
-
-# use calculate() for the function
-welcome()
-calculate()
