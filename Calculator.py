@@ -1,48 +1,77 @@
-# Program make a simple calculator that can add, subtract, multiply and divide using functions
+# define the function
+def calculate():
+    print('Please choose your operator adding(+) subtracting(-) multiplying(*) didviding(/) for power(**) for module(%)')
 
-# define functions
-def add(x, y):
-   """This function adds two numbers"""
+    number_1 = int(input("Enter your first digit: "))
+    operation = input("Enter your operator: ")
+    number_2 = int(input("Enter your first digit: "))
 
-   return x + y
 
-def subtract(x, y):
-   """This function subtracts two numbers"""
+# adding
+    if operation == '+':
+        print('{} + {} = '.format(number_1, number_2))
+        print(number_1 + number_2)
+        print("You were adding.\n")
+        print("How do I know that I'm a smart progammer ;)\n")
 
-   return x - y
+# subtracting
+    elif operation == '-':
+        print('{} - {} = '.format(number_1, number_2))
+        print(number_1 - number_2)
+        print("You were subtracting.\n")
+        print("How do I know that I'm a smart progammer ;)\n")
 
-def multiply(x, y):
-   """This function multiplies two numbers"""
+# mulitplaying
+    elif operation == '*':
+        print('{} * {} = '.format(number_1, number_2))
+        print(number_1 * number_2)
+        print("You were mulitplaying.")
+        print("How do I know that I'm a smart progammer ;)\n")
 
-   return x * y
+# dividing
+    elif operation == '/':
+        print('{} / {} = '.format(number_1, number_2))
+        print(number_1 / number_2)
+        print("You were dividing.\n")
+        print("How do I know that I'm a smart progammer ;)\n")
 
-def divide(x, y):
-   """This function divides two numbers"""
+# for power
+    elif operation == '**':
+        print('{} ** {} = '.format(number_1, number_2))
+        print(number_1 ** number_2)
+        print("You were using for power.\n")
+        print("How do I know that I'm a smart progammer ;)\n")
 
-   return x / y
+# module
+    elif operation == '%':
+        print('{} % {} = '.format(number_1, number_2))
+        print(number_1 % number_2)
+        print("You were using module.\n")
+        print("How do I know that I'm a smart progammer ;)\n")
 
-# take input from the user
-print("Select operation.")
-print("1.Add")
-print("2.Subtract")
-print("3.Multiply")
-print("4.Divide")
+    # if they get a error
+    else:
+        print("Your number you have typed is invalid, please restart your program!")
+    # add again() here as a function outside the calculate()
+    again()
 
-choice = input("Enter choice(1/2/3/4)")
 
-num1 = int(input("Enter first number: "))
-num2 = int(input("Enter second number: "))
+def again():
+    cal_again = input("Do you want to calculate again? Y = yes or N = no: ")
 
-if choice == '1':
-   print(num1,"+",num2,"=", add(num1,num2))
+    # Taking user input
+    if cal_again.upper() == 'Y':
+        calculate()
+    elif cal_again.upper() == 'N':
+        print('Leave kid ;-;')
+    else:
+        again()
 
-elif choice == '2':
-   print(num1,"-",num2,"=", subtract(num1,num2))
 
-elif choice == '3':
-   print(num1,"*",num2,"=", multiply(num1,num2))
+def welcome():
+    print("Welcome to my calculator made by Pepa pig lol made in python :D")
 
-elif choice == '4':
-   print(num1,"/",num2,"=", divide(num1,num2))
-else:
-   print("Invalid input")
+
+# use calculate() for the function
+welcome()
+calculate()
