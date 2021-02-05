@@ -44,6 +44,12 @@ pipeline {
            }
       }
   }
+    stage('Publish Coverage') {
+      publishCodeCoverage jacocoPathPattern: ' **/site/jacoco-unit-test-coverage-report/jacoco.xml ', lcovPathPattern: '**/coverage-reports/lcov.info'
+
+}
+ 
+   
    
 }
     post {
