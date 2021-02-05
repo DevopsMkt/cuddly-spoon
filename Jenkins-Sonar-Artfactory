@@ -5,7 +5,7 @@ pipeline {
                      
             stage('PythonTest') {
             steps {
-                sh 'python Calculator.py'
+                sh 'python calculator.py'
             }
         }   
         
