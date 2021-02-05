@@ -31,16 +31,16 @@ pipeline {
       }
   }
   
-
-#stage ('Distribute binaries') { 
- #   def server = Artifactory.server "ArtifactoryServer"
- #   def buildInfo = Artifactory.newBuildInfo()
- #   def rtMaven = Artifactory.newMavenBuild()
- #   rtMaven.tool= 'apache-maven-3.6.3'
- #   buildInfo.env.capture = true 
+/*
+stage ('Distribute binaries') { 
+   def server = Artifactory.server "ArtifactoryServer"
+   def buildInfo = Artifactory.newBuildInfo()
+   def rtMaven = Artifactory.newMavenBuild()
+   rtMaven.tool= 'apache-maven-3.6.3'
+   buildInfo.env.capture = true 
   
-#}
-  
+}
+*/  
 }
 }
         
