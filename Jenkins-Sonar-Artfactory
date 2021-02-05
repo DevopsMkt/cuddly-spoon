@@ -34,7 +34,7 @@ pipeline {
 stage ('Distribute binaries') { 
     def server = Artifactory.server "Server1"
     def buildInfo = Artifactory.newBuildInfo()
-    def buildInfo = Artifactory.newMavenBuild()
+    def rtMaven = Artifactory.newMavenBuild()
     rtMaven.tool= 'apache-maven-3.6.3'
     buildInfo.env.capture = true 
   
