@@ -31,21 +31,7 @@ pipeline {
       }
   }
     
-    
-    stage('Build & Generate Test Report') {
-          steps {
-              script {
-                 try {
-                        sh 'chmod +x gradlew'
-                        sh './gradlew build -x test --no-daemon'
-                        sh './gradlew test jacocoTestReport --no-daemon'
-                    } finally {
-                        junit '**/build/test-results/test/*.xml' //make 
-                                           }
-                }
-            }
-        }
-        
+               
        stage('Publish Test Coverage Report') {
          steps {
            step([$class: 'JacocoPublisher', 
