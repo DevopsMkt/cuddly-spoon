@@ -47,17 +47,36 @@ pipeline {
       }
   }
     
-    stage("Code Coverage") {
-     steps {
-          sh "./gradlew jacocoTestReport"
-          publishHTML (target: [
-               reportDir: 'build/reports/jacoco/test/html',
-               reportFiles: 'index.html',
-               reportName: "JaCoCo Report"
-          ])
-          sh "./gradlew jacocoTestCoverageVerification"
-     }
-}
+    
+    stage('Build & Generate Test Report') {
+          steps {
+              script {
+                 try {
+                        sh 'chmod +x gradlew'
+                        sh './gradlew build -x test --no-daemon'
+                        sh './gradlew test jacocoTestReport --no-daemon'
+                    } finally {
+                        junit '**/build/test-results/test/*.xml' //make 
+                        the junit test results available in any case 
+                        (success & failure)
+                    }
+                }
+            }
+        }
+        
+       stage('Publish Test Coverage Report') {
+         steps {
+           step([$class: 'JacocoPublisher', 
+                execPattern: '**/build/jacoco/*.exec',
+                classPattern: '**/build/classes',
+                sourcePattern: 'src/main/java',
+                exclusionPattern: 'src/*'
+                ])
+            }
+        }
+		
+    
+    
     
 }
  
