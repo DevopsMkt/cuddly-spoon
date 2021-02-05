@@ -1,8 +1,9 @@
 pipeline {
-    agent 'master'
-
-    stages {
-                     
+    agent {
+    node {
+        label 'master'
+     stages {
+                    
             stage('PythonTest') {
             steps {
                 sh 'python calculator.py'
