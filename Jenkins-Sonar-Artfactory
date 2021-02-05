@@ -32,23 +32,12 @@ pipeline {
   }
   
 stage ('Distribute binaries') { 
-    def SERVER_ID = '4711' 
-    def server = Artifactory.server SERVER_ID
-    def uploadSpec = 
-    """
-    {
-    "files": [
-        {
-            "pattern": "all/target/all-(*).war",
-            "target": "libs-snapshots-local/com/huettermann/web/{1}/"
-        }
-      ]
-    }
-    """
-    def buildInfo = Artifactory.newBuildInfo() 
+    def server = Artifactory.server "Server1"
+    def buildInfo = Artifactory.newBuildInfo()
+    def buildInfo = Artifactory.newMavenBuild()
+    rtMaven.tool= 'apache-maven-3.6.3'
     buildInfo.env.capture = true 
-    buildInfo=server.upload(uploadSpec) 
-    server.publishBuildInfo(buildInfo) 
+  
 }
   
 }
