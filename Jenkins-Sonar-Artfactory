@@ -1,0 +1,102 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying'
+            }
+        }
+            
+            stage('PythonTest') {
+            steps {
+                sh 'python Calculator.py'
+            }
+        }   
+        
+       stage('Code Quality Check via SonarQube') {
+           steps {
+                script {
+                def scannerHome = tool 'Sonar-Scanner';
+                withSonarQubeEnv("SonarQube-Server") {
+                sh "${scannerHome}/bin/sonar-scanner \
+               -Dsonar.projectKey=PythonJenkinsTest \
+               -Dsonar.sources=. \
+               -Dsonar.css.node=. \
+               -Dsonar.language=py \
+               -Dsonar.java.binaries=target/classes \
+               -Dsonar.sourceEncoding=UTF-8 \
+               -Dsonar.projectName=PythonJenkinsTest \
+               -Dsonar.jacoco.reportPaths=src \
+               -Dsonar.host.url=http:192.168.1.204:9000 \
+               -Dsonar.login=admin \
+               -Dsonar.password=Admin"
+               
+               }
+           }
+      }
+  }
+    
+    
+    stage('Build & Generate Test Report') {
+          steps {
+              script {
+                 try {
+                        sh 'chmod +x gradlew'
+                        sh './gradlew build -x test --no-daemon'
+                        sh './gradlew test jacocoTestReport --no-daemon'
+                    } finally {
+                        junit '**/build/test-results/test/*.xml' //make 
+                        the junit test results available in any case 
+                        (success & failure)
+                    }
+                }
+            }
+        }
+        
+       stage('Publish Test Coverage Report') {
+         steps {
+           step([$class: 'JacocoPublisher', 
+                execPattern: '**/build/jacoco/*.exec',
+                classPattern: '**/build/classes',
+                sourcePattern: 'src/main/java',
+                exclusionPattern: 'src/*'
+                ])
+            }
+        }
+		
+    
+    
+ 
+ } 
+   
+}
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failed'
+        }
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
+        }
+    }
+}
