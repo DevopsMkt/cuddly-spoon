@@ -1,0 +1,66 @@
+---
+# Install ZABBIX? Client
+- hosts: zabbix_client
+  remote_user: root
+  become: true
+  tasks:
+   - name: Install the zabbix rpm from a remote repo
+     yum:
+      name: https://repo.zabbix.com/zabbix/5.2/rhel/7/x86_64/zabbix-release-5.2-1.el7.noarch.rpm 
+      state: present
+      update_cache: True
+
+# Install https
+
+   - name: Install a list of packages with a list variable
+     yum:
+       name: "{{ packages }}"
+     vars:
+       packages:
+       - httpd
+       - httpd-tools
+       - openssl
+       - openssl-devel
+       - openssl-libs
+       - wget 
+       
+# Install Zabbix agent
+ 
+   - name: Install the latest version of zabbix-agent
+     yum:
+       name:
+         - zabbix-agent
+       state: latest
+
+# copy zabbix configuration file
+
+   - name: Ansible Copy zabbix configuration file
+     copy:
+      src: /home/zabbix/zabbix-agent/zabbix_agentd.conf
+      dest: /etc/zabbix/
+      force: yes
+
+
+# Restart services
+   - name: restart multiple services in a loop
+     service:
+       name: "{{ item }}"
+       state: started
+       enabled: true
+     register: service_output
+     loop:
+       - zabbix-agent
+       - httpd
+           
+   - debug: var=service_output
+
+
+
+# Initialize, turn oo zabbix-agent
+#   
+#   - name: enable zabbix-agent
+#     shell: systemctl start zabbix-agent ;systemctl enable zabbix-agent
+
+   - name: All done!
+     debug:
+       msg:  Packages have been successfully installed
